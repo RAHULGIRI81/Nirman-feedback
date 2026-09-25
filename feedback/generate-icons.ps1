@@ -36,21 +36,18 @@ function Draw-AmritaLogo {
         $brush.Dispose()
     }
 
-    # Relative coordinates based on 100x100 reference grid
-    $sx = $width / 100.0
-    $sy = $height / 100.0
-
-    # If foreground for adaptive icon (108x108), the content is placed inside central safe zone
-    $offsetX = 0.0
-    $offsetY = 0.0
+    # If foreground for adaptive icon (108x108), scale to 62% and center precisely
+    $scale = 0.74
     if ($isForegroundOnly) {
-        $sx = ($width * 0.72) / 100.0
-        $sy = ($height * 0.72) / 100.0
-        $offsetX = $width * 0.14
-        $offsetY = $height * 0.14
+        $scale = 0.62
     }
+    $sx = ($width * $scale) / 100.0
+    $sy = ($height * $scale) / 100.0
+    # Artwork center in original 100x100 space is (53, 48)
+    $offsetX = ($width / 2.0) - (53.0 * $sx)
+    $offsetY = ($height / 2.0) - (48.0 * $sy)
 
-    $whitePen = New-Object System.Drawing.Pen($whiteColor, (3.6 * $sx))
+    $whitePen = New-Object System.Drawing.Pen($whiteColor, (3.5 * $sx))
     $whitePen.StartCap = [System.Drawing.Drawing2D.LineCap]::Round
     $whitePen.EndCap = [System.Drawing.Drawing2D.LineCap]::Round
     $whitePen.LineJoin = [System.Drawing.Drawing2D.LineJoin]::Round

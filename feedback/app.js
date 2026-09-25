@@ -88,6 +88,7 @@ const state = {
   user: {
     name: "",
     email: "",
+    designation: "Teacher",
   },
   answers: Array(questions.length).fill(null),
 };
@@ -98,6 +99,9 @@ const completeCard = document.querySelector("#completeCard");
 const registrationForm = document.querySelector("#registrationForm");
 const userNameInput = document.querySelector("#userName");
 const userEmailInput = document.querySelector("#userEmail");
+const userDesignationSelect = document.querySelector("#userDesignation");
+const otherDesignationGroup = document.querySelector("#otherDesignationGroup");
+const otherDesignationInput = document.querySelector("#otherDesignation");
 const formError = document.querySelector("#formError");
 const startButton = document.querySelector("#startButton");
 const resetButton = document.querySelector("#resetButton");
@@ -287,10 +291,28 @@ function renderQuestion() {
   updateProgress();
 }
 
+function handleDesignationChange() {
+  const selected = userDesignationSelect ? userDesignationSelect.value : "Teacher";
+  if (otherDesignationGroup) {
+    otherDesignationGroup.classList.toggle("is-hidden", selected !== "Other");
+    if (selected === "Other" && otherDesignationInput) {
+      otherDesignationInput.focus();
+    }
+  }
+}
+
+if (userDesignationSelect) {
+  userDesignationSelect.addEventListener("change", () => {
+    handleDesignationChange();
+    if (formError) formError.textContent = "";
+  });
+}
+
 function startQuest(event) {
   if (event) event.preventDefault();
   const name = userNameInput ? userNameInput.value.trim() : "";
   const email = userEmailInput ? userEmailInput.value.trim() : "";
+  let designation = userDesignationSelect ? userDesignationSelect.value : "Teacher";
 
   if (!name) {
     if (formError) formError.textContent = "Please enter your full name.";
@@ -305,8 +327,18 @@ function startQuest(event) {
     return;
   }
 
+  if (designation === "Other") {
+    const customRole = otherDesignationInput ? otherDesignationInput.value.trim() : "";
+    if (!customRole) {
+      if (formError) formError.textContent = "Please specify your role / designation.";
+      if (otherDesignationInput) otherDesignationInput.focus();
+      return;
+    }
+    designation = customRole;
+  }
+
   if (formError) formError.textContent = "";
-  state.user = { name, email };
+  state.user = { name, email, designation };
   state.started = true;
   state.index = 0;
   if (visualStage) visualStage.classList.remove("is-complete");
@@ -321,6 +353,11 @@ if (userNameInput) {
 }
 if (userEmailInput) {
   userEmailInput.addEventListener("input", () => {
+    if (formError) formError.textContent = "";
+  });
+}
+if (otherDesignationInput) {
+  otherDesignationInput.addEventListener("input", () => {
     if (formError) formError.textContent = "";
   });
 }
@@ -349,7 +386,9 @@ function finishQuest() {
     (answeredCount || 1);
   completionTitle.textContent =
     average >= 4.4 ? "Excellent feedback run!" : average >= 3.2 ? "Feedback captured!" : "Improvement signals found";
-  const userGreeting = state.user.name ? `${state.user.name} (${state.user.email})` : "Educator";
+  const userGreeting = state.user.name
+    ? `${state.user.name} (${state.user.designation || "Educator"} · ${state.user.email})`
+    : "Educator";
   completionCopy.textContent = `Thank you, ${userGreeting}! You completed all ${questions.length} checkpoints. Your responses are ready to review or save.`;
   summaryGrid.innerHTML = "";
 
@@ -373,10 +412,13 @@ function resetAll(force = false) {
   }
   state.started = false;
   state.index = 0;
-  state.user = { name: "", email: "" };
+  state.user = { name: "", email: "", designation: "Teacher" };
   state.answers = Array(questions.length).fill(null);
   if (userNameInput) userNameInput.value = "";
   if (userEmailInput) userEmailInput.value = "";
+  if (userDesignationSelect) userDesignationSelect.value = "Teacher";
+  if (otherDesignationInput) otherDesignationInput.value = "";
+  if (otherDesignationGroup) otherDesignationGroup.classList.add("is-hidden");
   if (visualStage) visualStage.classList.remove("is-complete", "is-answering");
   if (saveStatus) saveStatus.textContent = "";
   if (formError) formError.textContent = "";
@@ -390,8 +432,10 @@ function buildFeedbackPayload() {
     title: "Amrita Nirman Feedback",
     name: state.user.name || "Anonymous",
     email: state.user.email || "anonymous@gmail.com",
+    designation: state.user.designation || "Teacher",
     userName: state.user.name || "Anonymous",
     userEmail: state.user.email || "anonymous@gmail.com",
+    userDesignation: state.user.designation || "Teacher",
     completedAt: new Date().toISOString(),
     answers: questions.map((question, index) => ({
       area: question.area,
@@ -418,10 +462,21 @@ function restoreSession() {
     if (data && data.started && Array.isArray(data.answers)) {
       state.started = data.started;
       state.index = data.index || 0;
-      state.user = data.user || { name: "", email: "" };
+      state.user = data.user || { name: "", email: "", designation: "Teacher" };
       state.answers = data.answers;
       if (userNameInput && state.user.name) userNameInput.value = state.user.name;
       if (userEmailInput && state.user.email) userEmailInput.value = state.user.email;
+      if (userDesignationSelect && state.user.designation) {
+        const standardRoles = ["Teacher", "Student"];
+        if (standardRoles.includes(state.user.designation)) {
+          userDesignationSelect.value = state.user.designation;
+          if (otherDesignationGroup) otherDesignationGroup.classList.add("is-hidden");
+        } else {
+          userDesignationSelect.value = "Other";
+          if (otherDesignationGroup) otherDesignationGroup.classList.remove("is-hidden");
+          if (otherDesignationInput) otherDesignationInput.value = state.user.designation;
+        }
+      }
       showOnly(questionCard);
       renderQuestion();
     }

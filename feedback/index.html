@@ -129,6 +129,30 @@
                 </div>
               </div>
 
+              <div class="input-group">
+                <label for="userDesignation">Designation / Role <span class="required">*</span></label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🎓</span>
+                  <select id="userDesignation" class="select-input" required>
+                    <option value="Teacher" selected>Teacher</option>
+                    <option value="Student">Student</option>
+                    <option value="Other">Other (Please specify)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="input-group is-hidden" id="otherDesignationGroup">
+                <label for="otherDesignation">Specify Your Role <span class="required">*</span></label>
+                <div class="input-wrapper">
+                  <span class="input-icon">✏️</span>
+                  <input
+                    type="text"
+                    id="otherDesignation"
+                    placeholder="e.g. Science Coordinator, Tutor, etc."
+                  />
+                </div>
+              </div>
+
               <p class="form-error" id="formError" role="alert"></p>
 
               <button class="primary-button start-btn" id="startButton" type="submit">
