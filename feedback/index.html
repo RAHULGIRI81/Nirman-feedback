@@ -17,15 +17,20 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="icon" type="image/svg+xml" href="assets/amrita-nirman-icon.svg" />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <main class="app-shell">
       <section class="game-panel" aria-label="Amrita Nirman Feedback">
         <aside class="brand-sidebar" aria-label="Amrita Nirman Feedback Overview">
           <div class="brand-header">
+            <div class="brand-logo-wrap" style="margin-bottom: 16px;">
+              <img src="assets/amrita-nirman-icon.svg" alt="Amrita Nirman Icon" width="56" height="56" style="border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);" />
+            </div>
             <p class="brand-eyebrow">FEEDBACK PORTAL</p>
             <h1 class="brand-title">AMRITA NIRMAN</h1>
+            <p class="brand-tagline" style="font-size: 0.82rem; color: #a7f3d0; margin: 4px 0 12px; font-weight: 500;">Empowering AI-driven thinking &amp; learning</p>
             <p class="brand-description">
               Help us evaluate and improve Amrita Nirman for modern classroom teaching.
             </p>
@@ -65,9 +70,14 @@
 
         <div class="play-area">
           <header class="topbar">
-            <div>
+            <div class="topbar-brand">
+              <img src="assets/amrita-nirman-icon.svg" width="28" height="28" alt="Amrita Nirman Logo" class="topbar-logo" />
+              <div class="topbar-text">
+                <span class="topbar-title">AMRITA NIRMAN</span>
+                <span class="topbar-sub">Feedback Portal</span>
+              </div>
             </div>
-            <button class="icon-button" id="resetButton" type="button" title="Reset feedback">
+            <button class="icon-button" id="resetButton" type="button" title="Restart / Reset feedback" aria-label="Reset feedback">
               ↺
             </button>
           </header>
@@ -83,7 +93,12 @@
           </div>
 
           <section class="card start-card" id="startCard">
-            <h2 style="font-weight: 600;">Share your experience with Amrita Nirman</h2>
+            <div class="start-header">
+              <h2>Educator Feedback Form</h2>
+              <p class="start-sub">
+                Help us evaluate lesson planning quality, AI relevance, and teacher control in Amrita Nirman.
+              </p>
+            </div>
 
             <form id="registrationForm" class="registration-form" novalidate>
               <div class="input-group">
@@ -117,7 +132,7 @@
               <p class="form-error" id="formError" role="alert"></p>
 
               <button class="primary-button start-btn" id="startButton" type="submit">
-                <span>Start Feedback</span>
+                <span>Start Survey</span>
                 <span>➔</span>
               </button>
             </form>
@@ -125,7 +140,7 @@
 
           <section class="card question-card is-hidden" id="questionCard" aria-live="polite">
             <div class="question-head">
-              <div>
+              <div class="question-info">
                 <p class="area-label" id="areaLabel"></p>
                 <h2 id="questionText"></h2>
               </div>
@@ -135,15 +150,18 @@
             <div class="actions">
               <button class="secondary-button" id="backButton" type="button">← Back</button>
               <button class="primary-button" id="nextButton" type="button" disabled>
-                Next →
+                <span>Next</span>
+                <span>→</span>
               </button>
             </div>
           </section>
 
           <section class="card complete-card is-hidden" id="completeCard">
-            <p class="badge">✓ Survey Complete</p>
-            <h2 id="completionTitle">Feedback Recorded</h2>
-            <p id="completionCopy"></p>
+            <div class="complete-header">
+              <p class="badge">✓ Survey Complete</p>
+              <h2 id="completionTitle">Feedback Recorded</h2>
+              <p id="completionCopy"></p>
+            </div>
             <div class="summary-grid" id="summaryGrid"></div>
             <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
             <div class="complete-actions">
@@ -161,7 +179,7 @@
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                <span>Download JSON</span>
+                <span>Download / Share</span>
               </button>
               <button class="secondary-button" id="againButton" type="button">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -176,7 +194,7 @@
       </section>
     </main>
 
-    <script src="config.js?v=11"></script>
-    <script src="app.js?v=11"></script>
+    <script src="config.js?v=12"></script>
+    <script src="app.js?v=12"></script>
   </body>
 </html>

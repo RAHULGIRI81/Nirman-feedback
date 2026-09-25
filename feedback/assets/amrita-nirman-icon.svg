@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background Forest Green -->
+  <rect width="100" height="100" rx="20" fill="#175C36"/>
+  
+  <!-- White Outline Frame (Top-Right) -->
+  <path d="M 53 40 L 53 26 A 6 6 0 0 1 59 20 L 85 20 A 6 6 0 0 1 91 26 L 91 58 A 6 6 0 0 1 85 64 L 66 64" 
+        fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        
+  <!-- Base Horizontal White Line -->
+  <line x1="17" y1="72" x2="57" y2="72" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- Left Diagonal White Line -->
+  <line x1="17" y1="72" x2="43" y2="39" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- Yellow Diagonal Line (Node 2 to Node 5) -->
+  <line x1="25" y1="52" x2="57" y2="72" stroke="#F2B835" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- Yellow Branch Line (Node 3 to Node 4) -->
+  <line x1="43" y1="39" x2="61" y2="54.5" stroke="#F2B835" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- Intersection White Dot -->
+  <circle cx="33" cy="57" r="2" fill="#FFFFFF"/>
+  
+  <!-- Node Circles -->
+  <circle cx="17" cy="72" r="5" fill="#FFFFFF"/>
+  <circle cx="25" cy="52" r="5.2" fill="#F2B835"/>
+  <circle cx="43" cy="39" r="5" fill="#F2B835"/>
+  <circle cx="61" cy="54.5" r="5" fill="#FFFFFF"/>
+  <circle cx="57" cy="72" r="5.2" fill="#F2B835"/>
+</svg>

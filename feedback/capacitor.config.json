@@ -1,6 +1,6 @@
 {
   "appId": "com.amrita.nirman.feedback",
-  "appName": "Amrita Nirman Feedback",
+  "appName": "Amrita Nirman",
   "webDir": "www",
   "server": {
     "androidScheme": "https",

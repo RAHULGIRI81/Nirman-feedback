@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Amrita Nirman Feedback</string>
-    <string name="title_activity_main">Amrita Nirman Feedback</string>
+    <string name="app_name">Amrita Nirman</string>
+    <string name="title_activity_main">Amrita Nirman</string>
     <string name="package_name">com.amrita.nirman.feedback</string>
     <string name="custom_url_scheme">com.amrita.nirman.feedback</string>
 </resources>

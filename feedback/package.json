@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "build": "node build.js",
+    "start": "node build.js && npx -y serve www -l 8080",
+    "dev": "node build.js && npx -y serve www -l 8080",
     "android:init": "npm run build && npx cap add android",
     "android:sync": "npm run build && npx cap sync android",
     "android:open": "npx cap open android",

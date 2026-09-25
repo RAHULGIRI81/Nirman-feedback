@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 180" width="100%" height="100%">
+  <!-- Icon Squircle -->
+  <g transform="translate(15, 15)">
+    <rect width="150" height="150" rx="30" fill="#175C36"/>
+    
+    <path d="M 79.5 60 L 79.5 39 A 9 9 0 0 1 88.5 30 L 127.5 30 A 9 9 0 0 1 136.5 39 L 136.5 87 A 9 9 0 0 1 127.5 96 L 99 96" 
+          fill="none" stroke="#FFFFFF" stroke-width="5.25" stroke-linecap="round" stroke-linejoin="round"/>
+          
+    <line x1="25.5" y1="108" x2="85.5" y2="108" stroke="#FFFFFF" stroke-width="5.25" stroke-linecap="round"/>
+    <line x1="25.5" y1="108" x2="64.5" y2="58.5" stroke="#FFFFFF" stroke-width="5.25" stroke-linecap="round"/>
+    <line x1="37.5" y1="78" x2="85.5" y2="108" stroke="#F2B835" stroke-width="5.25" stroke-linecap="round"/>
+    <line x1="64.5" y1="58.5" x2="91.5" y2="81.75" stroke="#F2B835" stroke-width="5.25" stroke-linecap="round"/>
+    
+    <circle cx="49.5" cy="85.5" r="3" fill="#FFFFFF"/>
+    <circle cx="25.5" cy="108" r="7.5" fill="#FFFFFF"/>
+    <circle cx="37.5" cy="78" r="7.8" fill="#F2B835"/>
+    <circle cx="64.5" cy="58.5" r="7.5" fill="#F2B835"/>
+    <circle cx="91.5" cy="81.75" r="7.5" fill="#FFFFFF"/>
+    <circle cx="85.5" cy="108" r="7.8" fill="#F2B835"/>
+  </g>
+  
+  <!-- Text Brand -->
+  <g transform="translate(190, 48)">
+    <text x="0" y="44" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="34" fill="#0E572D" letter-spacing="0.5">AMRITA NIRMAN</text>
+    <text x="0" y="78" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="16" fill="#175C36">Empowering AI-driven thinking &amp; learning</text>
+  </g>
+</svg>

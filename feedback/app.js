@@ -154,12 +154,17 @@ function updateProgress() {
   }
 }
 
+const brandSidebar = document.querySelector(".brand-sidebar");
+
 function showOnly(section) {
   [startCard, questionCard, completeCard].forEach((card) => {
     card.classList.toggle("is-hidden", card !== section);
   });
   if (progressWrap) {
     progressWrap.classList.toggle("is-hidden", section !== questionCard);
+  }
+  if (brandSidebar) {
+    brandSidebar.classList.toggle("is-survey-active", section === questionCard);
   }
 }
 
@@ -360,7 +365,12 @@ function finishQuest() {
   updateProgress();
 }
 
-function resetAll() {
+function resetAll(force = false) {
+  if (!force && state.started && state.answers.some(Boolean)) {
+    if (!confirm("Are you sure you want to restart? Your entered answers will be reset.")) {
+      return;
+    }
+  }
   state.started = false;
   state.index = 0;
   state.user = { name: "", email: "" };
@@ -370,6 +380,7 @@ function resetAll() {
   if (visualStage) visualStage.classList.remove("is-complete", "is-answering");
   if (saveStatus) saveStatus.textContent = "";
   if (formError) formError.textContent = "";
+  clearSession();
   showOnly(startCard);
   updateProgress();
 }
