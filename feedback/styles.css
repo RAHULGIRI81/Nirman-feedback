@@ -24,11 +24,19 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overscroll-behavior-y: contain;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--ink);
   background:
@@ -37,10 +45,16 @@ body {
     radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05), transparent 55%),
     var(--bg);
   -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 button {
   font: inherit;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 .app-shell {
@@ -870,26 +884,39 @@ h1 {
    ========================================================================== */
 @media (max-width: 880px) {
   .app-shell {
-    padding: 16px;
+    padding: 12px 10px;
+    align-items: flex-start;
   }
 
   .game-panel {
     grid-template-columns: 1fr;
     min-height: auto;
     border-radius: var(--radius-md);
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .visual-stage {
-    min-height: 230px;
-    padding: 24px;
+  .brand-sidebar {
+    padding: 24px 20px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .quest-map {
-    width: min(270px, 75%);
+  .brand-title {
+    font-size: 1.5rem;
+  }
+
+  .brand-description {
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+  }
+
+  .brand-features {
+    display: none;
   }
 
   .play-area {
-    padding: 26px 20px;
+    padding: 20px 16px;
   }
 }
 

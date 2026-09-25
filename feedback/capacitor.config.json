@@ -1,0 +1,23 @@
+{
+  "appId": "com.amrita.nirman.feedback",
+  "appName": "Amrita Nirman Feedback",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "launchAutoHide": true,
+      "backgroundColor": "#053b20",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#032614"
+    }
+  }
+}

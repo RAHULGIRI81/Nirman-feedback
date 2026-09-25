@@ -391,14 +391,68 @@ function buildFeedbackPayload() {
   };
 }
 
+const STORAGE_KEY = "amrita_nirman_feedback_state";
+
+function saveSession() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function restoreSession() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    if (data && data.started && Array.isArray(data.answers)) {
+      state.started = data.started;
+      state.index = data.index || 0;
+      state.user = data.user || { name: "", email: "" };
+      state.answers = data.answers;
+      if (userNameInput && state.user.name) userNameInput.value = state.user.name;
+      if (userEmailInput && state.user.email) userEmailInput.value = state.user.email;
+      showOnly(questionCard);
+      renderQuestion();
+    }
+  } catch (e) {}
+}
+
+function clearSession() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {}
+}
+
 function downloadResponses() {
   const payload = buildFeedbackPayload();
-  const blob = new Blob([JSON.stringify(payload, null, 2)], {
-    type: "application/json",
-  });
+  const jsonStr = JSON.stringify(payload, null, 2);
+  const fileName = `lesson-plan-feedback-${(state.user.name || "user").toLowerCase().replace(/\s+/g, "-")}.json`;
+
+  if (navigator.share && navigator.canShare) {
+    try {
+      const file = new File([jsonStr], fileName, { type: "application/json" });
+      if (navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: "Amrita Nirman Feedback",
+          text: `Feedback responses from ${state.user.name || "Educator"}`,
+          files: [file]
+        }).catch((err) => {
+          if (err.name !== "AbortError") downloadFallback(jsonStr, fileName);
+        });
+        return;
+      }
+    } catch (e) {
+      // Fallback
+    }
+  }
+  downloadFallback(jsonStr, fileName);
+}
+
+function downloadFallback(jsonStr, fileName) {
+  const blob = new Blob([jsonStr], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `lesson-plan-feedback-${(state.user.name || "user").toLowerCase().replace(/\s+/g, "-")}.json`;
+  link.download = fileName;
   link.click();
   URL.revokeObjectURL(link.href);
 }
@@ -427,11 +481,51 @@ async function saveToGoogleDrive() {
 
     saveStatus.textContent =
       `Feedback from ${state.user.name || "user"} sent! Check your Google Drive spreadsheet for the new row.`;
+    clearSession();
   } catch (error) {
     saveStatus.textContent =
       "Could not save to Google Drive. Check the Apps Script URL and deployment permissions.";
   } finally {
     saveDriveButton.disabled = false;
+  }
+}
+
+// Native Capacitor Mobile Support (Hardware back button, StatusBar, Splash screen)
+function initCapacitorBridge() {
+  if (typeof window.Capacitor === "undefined") return;
+
+  const plugins = window.Capacitor.Plugins || {};
+
+  // Status Bar styling
+  if (plugins.StatusBar) {
+    try {
+      plugins.StatusBar.setStyle({ style: "DARK" });
+      plugins.StatusBar.setBackgroundColor({ color: "#032614" });
+    } catch (e) {}
+  }
+
+  // Splash Screen hide
+  if (plugins.SplashScreen) {
+    try {
+      setTimeout(() => plugins.SplashScreen.hide(), 400);
+    } catch (e) {}
+  }
+
+  // Hardware Back Button listener
+  if (plugins.App) {
+    plugins.App.addListener("backButton", () => {
+      if (state.started && state.index > 0) {
+        goBack();
+      } else if (state.started && state.index === 0) {
+        if (confirm("Return to start screen? Unsaved progress will be preserved.")) {
+          resetAll();
+        }
+      } else if (!state.started && completeCard && !completeCard.classList.contains("is-hidden")) {
+        resetAll();
+      } else {
+        plugins.App.exitApp();
+      }
+    });
   }
 }
 
@@ -441,10 +535,22 @@ if (registrationForm) {
 if (startButton) {
   startButton.addEventListener("click", startQuest);
 }
-nextButton.addEventListener("click", goNext);
-backButton.addEventListener("click", goBack);
-resetButton.addEventListener("click", resetAll);
-againButton.addEventListener("click", resetAll);
+nextButton.addEventListener("click", () => {
+  goNext();
+  saveSession();
+});
+backButton.addEventListener("click", () => {
+  goBack();
+  saveSession();
+});
+resetButton.addEventListener("click", () => {
+  clearSession();
+  resetAll();
+});
+againButton.addEventListener("click", () => {
+  clearSession();
+  resetAll();
+});
 downloadButton.addEventListener("click", downloadResponses);
 saveDriveButton.addEventListener("click", saveToGoogleDrive);
 
@@ -455,12 +561,20 @@ document.addEventListener("keydown", (event) => {
 
   if (question.type === "choice" && value >= 1 && value <= question.options.length) {
     answerCurrent(question.options[value - 1]);
+    saveSession();
   } else if (question.type !== "choice" && value >= 1 && value <= 5) {
     answerCurrent({ label: `${value}`, value });
+    saveSession();
   }
 
-  if (event.key === "Enter" && state.answers[state.index]) goNext();
+  if (event.key === "Enter" && state.answers[state.index]) {
+    goNext();
+    saveSession();
+  }
 });
 
 initDots();
 updateProgress();
+restoreSession();
+initCapacitorBridge();
+
