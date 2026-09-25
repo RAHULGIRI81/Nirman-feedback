@@ -1,0 +1,24 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lesson feedback quest illustration</title>
+  <desc id="desc">A teacher dashboard, lesson cards, and achievement markers.</desc>
+  <rect width="720" height="720" rx="48" fill="#F8FBF9"/>
+  <circle cx="568" cy="130" r="66" fill="#F3B43F"/>
+  <circle cx="154" cy="580" r="82" fill="#E7654E"/>
+  <path d="M118 209C118 165.37 153.37 130 197 130H526C569.63 130 605 165.37 605 209V498C605 541.63 569.63 577 526 577H197C153.37 577 118 541.63 118 498V209Z" fill="#17211D"/>
+  <path d="M151 219C151 189.729 174.729 166 204 166H519C548.271 166 572 189.729 572 219V491C572 520.271 548.271 544 519 544H204C174.729 544 151 520.271 151 491V219Z" fill="#FFFFFF"/>
+  <rect x="190" y="217" width="205" height="23" rx="11.5" fill="#1F8A5B"/>
+  <rect x="190" y="265" width="340" height="17" rx="8.5" fill="#DBE4DF"/>
+  <rect x="190" y="299" width="265" height="17" rx="8.5" fill="#DBE4DF"/>
+  <rect x="190" y="355" width="91" height="82" rx="8" fill="#EAF6F0"/>
+  <rect x="314" y="355" width="91" height="82" rx="8" fill="#FFF4D8"/>
+  <rect x="438" y="355" width="91" height="82" rx="8" fill="#EAF0F6"/>
+  <path d="M218 394L235 411L261 377" stroke="#1F8A5B" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M342 394L359 411L385 377" stroke="#F3B43F" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M466 394L483 411L509 377" stroke="#3F7CAC" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="190" y="473" width="215" height="18" rx="9" fill="#17211D"/>
+  <rect x="429" y="463" width="101" height="38" rx="8" fill="#1F8A5B"/>
+  <path d="M105 115L118 144L149 148L126 169L132 200L105 184L78 200L84 169L61 148L92 144L105 115Z" fill="#F3B43F"/>
+  <path d="M621 489L633 516L662 520L641 539L646 568L621 553L596 568L601 539L580 520L609 516L621 489Z" fill="#3F7CAC"/>
+  <circle cx="104" cy="422" r="28" fill="#1F8A5B"/>
+  <circle cx="616" cy="303" r="22" fill="#E7654E"/>
+</svg>

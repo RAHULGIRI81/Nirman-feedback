@@ -1,0 +1,12 @@
+| Area                        | Interactive question                                                                    | Response                       |
+| --------------------------- | --------------------------------------------------------------------------------------- | ------------------------------ |
+| 🎯 **Relevance**            | **How well did the generated lesson plan match your teaching needs?**                   | ⭐ 1–5                          |
+| 📚 **Content Quality**      | **How appropriate was the generated content for the selected topic and learner level?** | 😟 → 🤩                        |
+| 🧩 **Lesson Structure**     | **How well was the lesson organized (objectives, activities, assessment, etc.)?**       | ⭐ 1–5                          |
+| ✏️ **Customization**        | **How easy was it to adapt the lesson plan to your classroom needs?**                   | Very Difficult → Very Easy     |
+| 💡 **Teaching Support**     | **Did the assistant give you useful ideas or activities you could use in class?**       | Not Useful → Very Useful       |
+| ⏱️ **Time Saving**          | **Would this assistant reduce the time you spend preparing lesson plans?**              | Not at all → Significantly     |
+| 🤖 **AI Output Confidence** | **How confident would you feel using the generated lesson plan after reviewing it?**    | Not Confident → Very Confident |
+| 👩‍🏫 **Teacher Control**   | **Did you feel you had enough control to modify the AI-generated plan?**                | Not Enough → Complete Control  |
+| 🚀 **Adoption**             | **Would you use this assistant for future lesson planning?**                            | ❌ No / 🤔 Maybe / ✅ Yes        |
+| 🌟 **Overall Experience**   | **How would you rate your overall experience?**                                         | ⭐ 1–5                          |
